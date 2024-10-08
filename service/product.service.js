@@ -1,4 +1,5 @@
 const productModel = require('../models/product.model');
+const fileService = require('./file.service');
 
 class ProductService {
   async getAll() {
@@ -6,8 +7,13 @@ class ProductService {
     return products;
   }
 
-  async createProduct(product) {
-    const newProduct = await productModel.create(product);
+  async createProduct(product, picture) {
+    const fileName = fileService.save(picture);
+
+    const newProduct = await productModel.create({
+      ...product,
+      imageUrl: fileName,
+    });
     return newProduct;
   }
 

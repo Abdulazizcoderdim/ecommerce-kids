@@ -5,11 +5,15 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
+
 
 // middleware
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
+app.use(express.static('static'));
+app.use(fileUpload({}));
 
 // routes
 app.use('/api/products', require('./routes/product.route'));
