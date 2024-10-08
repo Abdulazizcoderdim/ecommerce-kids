@@ -28,6 +28,10 @@ class ProductService {
     const deletedProduct = await productModel.findByIdAndDelete(id);
     return deletedProduct;
   }
+
+  async getOne(id) {
+    return await productModel.findById(id);
+  }
 }
 
 module.exports = new ProductService();

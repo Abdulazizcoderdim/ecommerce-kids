@@ -12,7 +12,10 @@ class ProductController {
   }
   async createProduct(req, res) {
     try {
-      const newProduct = await productService.createProduct(req.body, req.files.picture);
+      const newProduct = await productService.createProduct(
+        req.body,
+        req.files.picture
+      );
       res.status(201).json(newProduct);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -36,6 +39,17 @@ class ProductController {
       const { id } = req.params;
       const deletedProduct = await productService.deleteProduct(id);
       res.status(200).json(deletedProduct);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+      console.log(error);
+    }
+  }
+
+  async getOne(req, res) {
+    try {
+      const { id } = req.params;
+      const oneProduct = await productService.getOne(id);
+      res.status(200).json(oneProduct);
     } catch (error) {
       res.status(500).json({ error: error.message });
       console.log(error);
