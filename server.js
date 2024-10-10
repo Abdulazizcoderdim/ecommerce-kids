@@ -7,10 +7,9 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 
-
 // middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use(cookieParser());
 app.use(express.static('static'));
 app.use(fileUpload({}));
